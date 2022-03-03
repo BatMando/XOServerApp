@@ -9,7 +9,7 @@ package model;
  *
  * @author Thoraya Hamdy
  */
-public class User {
+public class Player {
     private String userName = "";
     private String email = "";
     private String password = "";
@@ -18,10 +18,10 @@ public class User {
     private String ipAddress = "";
     private Integer score = 0;
 
-    public User(){
+    public Player(){
         
     }
-    public User(String userName, String email, String password, boolean isActive, boolean isPlaying, String ipAddress, Integer score) {
+    public Player(String userName, String email, String password, boolean isActive, boolean isPlaying, String ipAddress, Integer score) {
         this.userName = userName;
         this.email = email;
         this.password = password;
