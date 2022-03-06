@@ -15,19 +15,17 @@ public class Player {
     private String password = "";
     private boolean isActive;
     private boolean isPlaying;
-    private String ipAddress = "";
     private Integer score = 0;
 
     public Player(){
         
     }
-    public Player(String userName, String email, String password, boolean isActive, boolean isPlaying, String ipAddress, Integer score) {
+    public Player(String userName, String email, String password, boolean isActive, boolean isPlaying, Integer score) {
         this.userName = userName;
         this.email = email;
         this.password = password;
         this.isActive = isActive;
         this.isPlaying = isPlaying;
-        this.ipAddress = ipAddress;
         this.score = score;
     }
 
@@ -69,14 +67,6 @@ public class Player {
 
     public void setIsPlaying(boolean isPlaying) {
         this.isPlaying = isPlaying;
-    }
-
-    public String getIpAddress() {
-        return ipAddress;
-    }
-
-    public void setIpAddress(String ipAddress) {
-        this.ipAddress = ipAddress;
     }
 
     public Integer getScore() {
