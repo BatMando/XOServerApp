@@ -36,6 +36,16 @@ public class Database {
         return databaseInstance;
     }
     
+    public synchronized void disableConnection() throws SQLException{
+        setAllPlayersToNotPlaying();
+        setAllPlayersToOffline();
+
+        result.close();
+        preStmt.close();
+        con.close();
+        databaseInstance = null;
+    }
+    
     public synchronized void selectResultSet(){
         
         try {
@@ -119,6 +129,57 @@ public class Database {
         return false;
     }
     
+    
+    public synchronized int getCountOfOfflinePlayers(){
+        try {
+            this.preStmt =con.prepareStatement("select count(*) from player where isActive = false",ResultSet.TYPE_SCROLL_SENSITIVE ,ResultSet.CONCUR_READ_ONLY);
+            ResultSet r =preStmt.executeQuery();
+            if(r.next()){
+                return r.getInt(1);
+            }
+            else{
+                return -1;
+            }
+        }catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("catch getactive");
+        }
+        return -1;
+    }
+    
+    public synchronized int getCountOfOnlinePlayers(){
+        try {
+            this.preStmt =con.prepareStatement("select count(*) from player where isActive = true",ResultSet.TYPE_SCROLL_SENSITIVE ,ResultSet.CONCUR_READ_ONLY);
+            ResultSet r =preStmt.executeQuery();
+            if(r.next()){
+                return r.getInt(1);
+            }
+            else{
+                return -1;
+            }
+        }catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("catch getactive");
+        }
+        return -1;
+    }
+    
+    
+    public synchronized ResultSet getActivePlayers( ){
+        
+        try {
+            this.preStmt =con.prepareStatement("Select * from player where isActive = true ",ResultSet.TYPE_SCROLL_SENSITIVE ,ResultSet.CONCUR_READ_ONLY);
+            return preStmt.executeQuery();
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("catch getactive");
+            return null;
+        }
+        
+    }
+    
+    
+    
     //get player data:
     public synchronized Player getPlayer(String email){
         String stmt = "select * from Player where email=?";
@@ -136,8 +197,7 @@ public class Database {
                 p.setPassword(rs.getString(3));
                 p.setIsActive(rs.getBoolean(4));
                 p.setIsPlaying(rs.getBoolean(5));
-                p.setIpAddress(rs.getString(6));
-                p.setScore(rs.getInt(7));
+                p.setScore(rs.getInt(6));
                 return p;
             }
         } catch (SQLException ex) {
@@ -226,7 +286,7 @@ public class Database {
     //update player data
     public synchronized void changeActivation(String email){
         Player ptemp = this.getPlayer(email);
-        boolean state = ptemp.isIsActive();
+        boolean state = !ptemp.isIsActive();
         try {
             preStmt = con.prepareStatement("update player set isActive = ? where email = ?");
             preStmt.setBoolean(1, state);
@@ -240,7 +300,7 @@ public class Database {
     
     public synchronized void changePlaying(String email){
         Player ptemp = this.getPlayer(email);
-        boolean state = ptemp.isIsPlaying();
+        boolean state = !ptemp.isIsPlaying();
         try {
             preStmt = con.prepareStatement("update player set isPlaying = ? where email = ?");
             preStmt.setBoolean(1, state);
@@ -251,4 +311,48 @@ public class Database {
         }
         selectResultSet();
     }
+    
+    public synchronized void updateScore(String email, int score){
+        try {
+            preStmt = con.prepareStatement("update player set score = ?  where email = ?",ResultSet.TYPE_SCROLL_SENSITIVE ,ResultSet.CONCUR_UPDATABLE  );
+            preStmt.setInt(1, score);
+            preStmt.setString(2, email);
+            preStmt.executeUpdate();
+            selectResultSet();
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
+    public synchronized void setAllPlayersToNotPlaying(){
+         try {
+            preStmt = con.prepareStatement("update player set isPlaying = ? ",ResultSet.TYPE_SCROLL_SENSITIVE ,ResultSet.CONCUR_UPDATABLE);
+            preStmt.setString(1, "false");
+            preStmt.executeUpdate();
+            selectResultSet();
+        } catch (SQLException ex) {
+            System.out.println("set all players to not playing");
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public synchronized void setAllPlayersToOffline(){
+        try {
+            preStmt = con.prepareStatement("update player set isActive = ? ",ResultSet.TYPE_SCROLL_SENSITIVE ,ResultSet.CONCUR_UPDATABLE);
+            preStmt.setString(1, "false");
+            preStmt.executeUpdate();
+            selectResultSet();
+        } catch (SQLException ex) {
+            System.out.println("set all players to offline");
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    public synchronized void makePlaying(String player1, String player2){
+        changePlaying(player1);
+        changePlaying(player2);
+    }
+    
 } 
