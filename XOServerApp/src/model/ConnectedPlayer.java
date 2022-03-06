@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model;
+package model;
 
 import model.Server;
-import controller.FXMLHomeScreenController;
+import controller.FXMLHomeController;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -217,7 +217,7 @@ public class ConnectedPlayer extends Thread implements Initializable {
         public void run() {
             
             while(true){
-                if(FXMLHomeScreenController.serverState){
+                if(FXMLHomeController.serverState){
                     result = server.getActivePlayers();
                     try {
                         while(result.next()){

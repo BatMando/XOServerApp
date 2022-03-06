@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.effect.GaussianBlur?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="473.0" prefWidth="638.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLHomeController">
+    <children>
+      <ImageView fitHeight="476.0" fitWidth="846.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/oneVsoneImg@2x.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="341.0" fitWidth="768.0" layoutX="83.0" layoutY="89.0" opacity="0.16" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/bgggg@2x.png" />
+         </image>
+         <effect>
+            <GaussianBlur radius="1.55" />
+         </effect>
+      </ImageView>
+      <Line endX="736.0" endY="108.00210571289062" layoutY="21.0" startX="108.0" startY="108.00210571289062" stroke="#707070" />
+      <StackPane layoutX="367.0" layoutY="177.0" prefHeight="150.0" prefWidth="158.0">
+         <children>
+            <ImageView fitHeight="184.0" fitWidth="158.0" opacity="0.34" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/buttonbg@2x.png" />
+               </image>
+               <effect>
+                  <GaussianBlur radius="1.55" />
+               </effect>
+            </ImageView>
+            <VBox alignment="CENTER" prefHeight="150.0" prefWidth="153.0">
+               <children>
+                  <ImageView fitHeight="84.0" fitWidth="142.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/ipaddress@2x.png" />
+                     </image>
+                  </ImageView>
+                  <Label text="Ip Address" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Raleway SemiBold" size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="12.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+               <StackPane.margin>
+                  <Insets />
+               </StackPane.margin>
+            </VBox>
+            <Button fx:id="ipAddressBtn" mnemonicParsing="false" onAction="#getip" opacity="0.0" prefHeight="145.0" prefWidth="158.0" style="-fx-background-color: #4C3388;" textFill="WHITE" />
+         </children>
+      </StackPane>
+      <Label layoutX="359.0" layoutY="30.0" text="Server App" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="Poppins Bold" size="31.0" />
+         </font>
+      </Label>
+      <StackPane layoutX="560.0" layoutY="178.0" prefHeight="150.0" prefWidth="158.0">
+         <children>
+            <ImageView fitHeight="184.0" fitWidth="158.0" opacity="0.34" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/buttonbg@2x.png" />
+               </image>
+               <effect>
+                  <GaussianBlur radius="1.55" />
+               </effect>
+            </ImageView>
+            <VBox alignment="CENTER" prefHeight="150.0" prefWidth="153.0">
+               <children>
+                  <ImageView fitHeight="84.0" fitWidth="142.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/stat@2x.png" />
+                     </image>
+                  </ImageView>
+                  <Label text="Statistics" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Raleway SemiBold" size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="12.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+               <StackPane.margin>
+                  <Insets />
+               </StackPane.margin>
+            </VBox>
+            <Button fx:id="statBtn" mnemonicParsing="false" onAction="#chartHandle" opacity="0.0" prefHeight="145.0" prefWidth="158.0" style="-fx-background-color: #4C3388;" textFill="WHITE" />
+         </children>
+      </StackPane>
+      <HBox layoutX="124.0" layoutY="103.0" spacing="8.0">
+         <children>
+            <Label text="List Player : " textFill="WHITE">
+               <font>
+                  <Font name="Poppins Bold" size="13.0" />
+               </font>
+            </Label>
+            <RadioButton fx:id="onlineRadioBtn" mnemonicParsing="false" onAction="#toggleList" text="Online Players" textFill="WHITE" />
+            <RadioButton fx:id="offlineRadioBtn" mnemonicParsing="false" onAction="#toggleList" text="Offline Players" textFill="WHITE" />
+         </children>
+      </HBox>
+      <HBox layoutX="652.0" layoutY="99.0" spacing="2.0">
+         <children>
+            <Button fx:id="onBtn" mnemonicParsing="false" onAction="#toggleServer" prefHeight="27.0" prefWidth="43.0" style="-fx-background-color: #2F862F;" text="ON" textFill="WHITE" />
+            <Button fx:id="offBtn" mnemonicParsing="false" onAction="#toggleServer" style="-fx-background-color: #C72828;" text="OFF" textFill="WHITE" />
+         </children>
+      </HBox>
+      <Label layoutX="541.0" layoutY="103.0" text="Server Status : " textFill="WHITE">
+         <font>
+            <Font name="Poppins Bold" size="13.0" />
+         </font>
+      </Label>
+      <ScrollPane fx:id="scrollPane" layoutX="124.0" layoutY="177.0" prefHeight="200.0" prefWidth="200.0" />
+      
+        
+    
+    </children>
+</AnchorPane>

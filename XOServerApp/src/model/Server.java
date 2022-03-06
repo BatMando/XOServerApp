@@ -38,7 +38,8 @@ public class Server {
     
     public void enableConnections() throws SQLException{
         databaseInstance = Database.getConnection();
-        databaseInstance.disableConnection();
+        databaseInstance.resetStatus();
+        //databaseInstance.disableConnection();
         databaseInstance.selectResultSet();
         initServer();
     }

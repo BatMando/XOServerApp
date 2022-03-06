@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model;
+package model;
 
 import javafx.application.Application;
 import static javafx.application.Application.launch;
@@ -20,7 +20,7 @@ import javafx.stage.WindowEvent;
  *
  * @author Toba
  */
-public class Chart /*extends Application*/ {
+public class Chart extends Application {
     
     private static Chart ch;
     private ObservableList<PieChart.Data> pieChartData;
@@ -50,7 +50,7 @@ public class Chart /*extends Application*/ {
     public void setChartData(ObservableList<PieChart.Data> ob){
         this.pieChartData = ob;
     }
-    /*
+    
     @Override
     public void start(Stage stage) throws Exception {
         
@@ -58,7 +58,6 @@ public class Chart /*extends Application*/ {
         chart.setTitle("Tic Tac Toe Statistics");
         
         Scene scene = new Scene(new Group());
-        scene.getStylesheets().add("/css/fullpackstyling.css");
         ((Group) scene.getRoot()).getChildren().add(chart);
         if(dialogStage == null){
             
@@ -82,5 +81,5 @@ public class Chart /*extends Application*/ {
     public static void main(String[] args) {
         launch(args);
     }
-*/
+
 }
