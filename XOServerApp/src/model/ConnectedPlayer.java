@@ -57,6 +57,7 @@ public class ConnectedPlayer extends Thread implements Initializable {
     }
 
    public ConnectedPlayer(Socket socket){
+       System.out.println("socket is created");
        server = Server.getServer();
        try {
             dis = new DataInputStream(socket.getInputStream());
