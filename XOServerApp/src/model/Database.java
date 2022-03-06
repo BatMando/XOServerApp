@@ -35,7 +35,9 @@ public class Database {
         }
         return databaseInstance;
     }
-    
+    public synchronized ResultSet getResultSet(){
+        return result;
+    }
     public synchronized void disableConnection() throws SQLException{
         setAllPlayersToNotPlaying();
         setAllPlayersToOffline();
@@ -86,14 +88,14 @@ public class Database {
     }
     
     
-    public synchronized boolean validateRegister(Player p){
+    public synchronized boolean validateRegister(String userName, String email){
         String stmt="select email from Player where email=?";
         PreparedStatement pStmt;
         ResultSet rs;
         boolean isExist=false;
         try {
             pStmt = con.prepareStatement(stmt, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            pStmt.setString(1, p.getEmail());
+            pStmt.setString(1, email);
             rs = pStmt.executeQuery();
             if(rs.next()){
                 isExist=true;
