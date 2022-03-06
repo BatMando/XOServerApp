@@ -19,7 +19,7 @@ public class XOServerApp extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLHomeScreen.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLHome.fxml"));
         
         Scene scene = new Scene(root);
         

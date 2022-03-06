@@ -38,13 +38,15 @@ public class Database {
         return result;
     }
     public synchronized void disableConnection() throws SQLException{
-        setAllPlayersToNotPlaying();
-        setAllPlayersToOffline();
-
+        resetStatus();
         result.close();
         preStmt.close();
         con.close();
         databaseInstance = null;
+    }
+       public synchronized void resetStatus() throws SQLException{
+        setAllPlayersToNotPlaying();
+        setAllPlayersToOffline();
     }
     
     public synchronized void selectResultSet(){
