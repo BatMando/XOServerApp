@@ -12,7 +12,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import org.apache.derby.jdbc.ClientDriver;
 /**
  *
@@ -88,47 +87,45 @@ public class Database {
     }
     
     
-    public synchronized boolean validateRegister(String userName, String email){
+    public synchronized String validateRegister(String userName, String email){
         String stmt="select email from Player where email=?";
         PreparedStatement pStmt;
         ResultSet rs;
-        boolean isExist=false;
         try {
             pStmt = con.prepareStatement(stmt, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             pStmt.setString(1, email);
             rs = pStmt.executeQuery();
             if(rs.next()){
-                isExist=true;
+                return "already signed-up";
             }
             else{
-                isExist=false;
+               return "Registered Successfully";
             }
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+            return "Connection Issues";
         }
-        return isExist;
     }
     
-    public synchronized boolean validateLogin(String email,String password){
+    public synchronized String validateLogin(String email,String password){
         Player ptemp = this.getPlayer(email);
         if(ptemp!=null){
             String pass=ptemp.getPassword();
             if(pass.equals(password)){
                 if(checkIsActive(email)){
-                    System.out.println("player already signed in!");
+                    return "This Email is alreay sign-in";
                 }
                 else{
-                    return true;
+                    return "Logged in successfully";
                 }
             }
             else{
-                System.out.println("incorrect password!");
+                return "Password is incorrect";
             }
         }
         else{
-            System.out.println("No player with that email!");
+            return "Email is incorrect";
         }
-        return false;
     }
     
     

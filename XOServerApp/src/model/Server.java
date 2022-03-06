@@ -85,9 +85,9 @@ public class Server {
 //    public void getActivePlayers1(){
 //        databaseInstance.getActivePlayers();
 //    }
-    public boolean checkSignIn(String email,String password){ //we can change it to return string
+    public String checkSignIn(String email,String password){ //we can change it to return string
         //for validation messages to appear to the user
-        return databaseInstance.validateLogin(email, password); 
+        return databaseInstance.validateLogin(email, password);  
     }
     public int getScore(String email){
         return databaseInstance.getScore(email);
@@ -98,11 +98,12 @@ public class Server {
     public void login(String email,String password) throws SQLException{
         databaseInstance.login(email, password);
     }
-    public boolean checkRegister(String username,String email){ //we can change it to return string
+    public String checkRegister(String username,String email){ //we can change it to return string
         //for validation messages to appear to the user
-        return databaseInstance.validateLogin(username, email);
+        return databaseInstance.validateRegister(username, email);
     }
-    public void SignUp(Player p) throws SQLException{
+    public void SignUp(String username,String email,String password) throws SQLException{
+        Player p = new Player(username,email,password,false,false,0);
         databaseInstance.register(p);
     }
     public ResultSet getActivePlayers(){

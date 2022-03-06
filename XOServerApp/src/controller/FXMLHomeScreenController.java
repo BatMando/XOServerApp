@@ -17,7 +17,8 @@ import javafx.scene.control.Label;
  * @author Thoraya Hamdy
  */
 public class FXMLHomeScreenController implements Initializable {
-    
+    public static boolean serverState ;
+
     @FXML
     private Label label;
     
