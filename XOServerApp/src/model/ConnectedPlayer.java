@@ -75,6 +75,7 @@ public class ConnectedPlayer extends Thread implements Initializable {
        }
    }
     public void run(){
+        if (server!=null){
         while(currentSocket.isConnected()){
             try {
                 clientData = dis.readLine();
@@ -131,7 +132,7 @@ public class ConnectedPlayer extends Thread implements Initializable {
 
                 if(email != null){
                     server.setActive(false,email);
-                    server.setNotPlaying(email);
+                    server.setPlaying(false,email);
                     activeUsers.remove(this);   
 
                 }else{
@@ -150,7 +151,15 @@ public class ConnectedPlayer extends Thread implements Initializable {
         if(currentSocket.isClosed()){
             System.out.println("3");
             System.out.println("close");
-            //server.getActivePlayers();
+        }
+        }else{
+
+            try {
+                currentSocket.close();
+            } catch (IOException ex) {
+                Logger.getLogger(ConnectedPlayer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
         }
     }
    
@@ -298,7 +307,7 @@ public class ConnectedPlayer extends Thread implements Initializable {
     }
     private synchronized void reset(){
         System.out.println("reset: " +email);
-        server.setNotPlaying(email);
+        server.setPlaying(false,email);
     }
    
     private void forwardPress(){
@@ -351,6 +360,7 @@ public class ConnectedPlayer extends Thread implements Initializable {
         }
        try {
            currentSocket.close();
+           System.out.println("socket closed after log out");
        } catch (IOException ex) {
            Logger.getLogger(ConnectedPlayer.class.getName()).log(Level.SEVERE, null, ex);
        }

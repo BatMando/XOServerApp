@@ -11,6 +11,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,6 +25,7 @@ public class Server {
     private ServerSocket serverSocket ;
     private Socket clientSocket ;
     private Thread listenerThread;
+    private ArrayList<Socket> allSocketsOfClients = new ArrayList();
     
     private Server(){
         
@@ -52,6 +54,7 @@ public class Server {
                     try {
                         clientSocket = serverSocket.accept();
                         new ConnectedPlayer(clientSocket);
+                        allSocketsOfClients.add(clientSocket);
                         System.out.println("socket is created");                        
                     } catch (IOException ex) {
                         Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
@@ -65,6 +68,12 @@ public class Server {
         }
     }
     
+    public void notifyAllClients() throws IOException{
+        
+        for(int i = 0; i< allSocketsOfClients.size(); ++i){
+            allSocketsOfClients.get(i).close();
+        }
+    }
     public void disableConnections(){
         try {
             databaseInstance.disableConnection();
@@ -79,14 +88,12 @@ public class Server {
     }
     
     public void setActive(Boolean state, String mail){
-        databaseInstance.changeActivation(mail);
+        databaseInstance.changeActivation(state,mail);
     }
-    public void setNotPlaying(String email){
-        databaseInstance.changePlaying(email);
+    public void setPlaying(boolean state,String email){
+        databaseInstance.changePlaying(state,email);
     }
-//    public void getActivePlayers1(){
-//        databaseInstance.getActivePlayers();
-//    }
+
     public String checkSignIn(String email,String password){ //we can change it to return string
         //for validation messages to appear to the user
         return databaseInstance.validateLogin(email, password);  
