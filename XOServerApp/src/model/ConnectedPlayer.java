@@ -57,7 +57,6 @@ public class ConnectedPlayer extends Thread implements Initializable {
     }
 
    public ConnectedPlayer(Socket socket){
-       System.out.println("socket is created");
        server = Server.getServer();
        try {
             dis = new DataInputStream(socket.getInputStream());
@@ -136,11 +135,12 @@ public class ConnectedPlayer extends Thread implements Initializable {
                     activeUsers.remove(this);   
 
                 }else{
-                   System.out.println("nulllllll");  
+                   System.out.println("nulllllll"); 
                    updateList = true;
                  }
                 try {
                     currentSocket.close();
+                    System.out.println("socket closed");
                 } catch (IOException ex1) {
                     Logger.getLogger(ConnectedPlayer.class.getName()).log(Level.SEVERE, null, ex1);
                 }
