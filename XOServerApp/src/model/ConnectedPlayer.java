@@ -78,8 +78,8 @@ public class ConnectedPlayer extends Thread implements Initializable {
         while(currentSocket.isConnected()){
             try {
                 clientData = dis.readLine();
-                System.out.println(clientData);
                 if(clientData != null){
+                    System.out.println(clientData);
                     token = new StringTokenizer(clientData,"####");
                     query = token.nextToken();
                     switch(query){
