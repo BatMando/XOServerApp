@@ -85,7 +85,7 @@ public class Database {
     }
     
     public synchronized void login(String email,String password){
-        changePlaying(email);
+        changeActivation(email);
     }
     
     
