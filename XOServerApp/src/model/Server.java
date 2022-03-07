@@ -52,9 +52,7 @@ public class Server {
                     try {
                         clientSocket = serverSocket.accept();
                         new ConnectedPlayer(clientSocket);
-                        System.out.println("socket is created");
-                        new ConnectedPlayer(clientSocket);
-                        
+                        System.out.println("socket is created");                        
                     } catch (IOException ex) {
                         Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
                     }
