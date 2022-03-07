@@ -8,11 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-<<<<<<< HEAD
-    <jar href="XOServerApp.jar" size="1451055" download="eager" />
-=======
-    <jar href="XOServerApp.jar" size="1450758" download="eager" />
->>>>>>> main
+    <jar href="XOServerApp.jar" size="1451101" download="eager" />
     <jar href="lib\derby.jar" size="3232770" download="eager" />
     <jar href="lib\derbyclient.jar" size="588394" download="eager" />
     <jar href="lib\derbynet.jar" size="272626" download="eager" />
