@@ -101,6 +101,7 @@ public class FXMLHomeController implements Initializable {
 
                    }catch(InterruptedException ex){
                      emptyList();
+                     
                    }
                 }
             }
@@ -224,8 +225,8 @@ public class FXMLHomeController implements Initializable {
             }catch(SQLException e){
                 System.out.println("Connection Issues, Try again later");
                 serverState = !serverState;
+                 handleOnOffButtons();
             }
-//            }
         }else{ // state is true needed to be deactivate
             try {
 
@@ -234,17 +235,15 @@ public class FXMLHomeController implements Initializable {
                 onlineOrOfflineFlag = true;
                 //Platform.exit();
             }
-//            catch (FileNotFoundException ex) {
-//                System.out.println("No Img");
-//            }
+            
             finally{
                 server.disableConnections();
+                handleOnOffButtons();
                 emptyList();
                 disableBtn();
             }
         }
             
-        
     }
  
     
@@ -252,31 +251,27 @@ public class FXMLHomeController implements Initializable {
     
     @FXML
     private void toggleList(ActionEvent e){
-        
-       
-        
+
         if(onlineOrOfflineFlag){
-            System.out.println("list off");
+            System.out.println("list on");
             scrollPane.setContent(null);
             onlineOrOfflineFlag = false;
             onlineRadioBtn.setSelected(true);
             onlineRadioBtn.setDisable(true);
             offlineRadioBtn.setSelected(false);
             offlineRadioBtn.setDisable(false);
-            listPlayers(false);
+            listPlayers(true);
 
         }else{
-            System.out.println("list on");
+            System.out.println("list off");
             scrollPane.setContent(null);
             onlineOrOfflineFlag = true;
             onlineRadioBtn.setSelected(false);  
             onlineRadioBtn.setDisable(false);
             offlineRadioBtn.setSelected(true); 
             offlineRadioBtn.setDisable(true); 
-            listPlayers(true);
-            //listbtnlbl.setText("List Offline Players");
-            //listimg.setImage(new Image(this.getClass().getResourceAsStream("/resources/Offline.png")));
-
+            listPlayers(false);
+           
         }
     }
     @FXML
