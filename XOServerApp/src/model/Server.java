@@ -51,7 +51,13 @@ public class Server {
                 while(true){
                     try {
                         clientSocket = serverSocket.accept();
+<<<<<<< HEAD
                         new ConnectedPlayer(clientSocket);
+=======
+                        System.out.println("socket is created");
+                        new ConnectedPlayer(clientSocket);
+                        
+>>>>>>> main
                     } catch (IOException ex) {
                         Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
                     }
