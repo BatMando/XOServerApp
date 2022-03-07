@@ -85,7 +85,7 @@ public class Database {
     }
     
     public synchronized void login(String email,String password){
-        changeActivation(email);
+        changeActivation(true,email);
     }
     
     
@@ -285,9 +285,8 @@ public class Database {
     
     
     //update player data
-    public synchronized void changeActivation(String email){
-        Player ptemp = this.getPlayer(email);
-        boolean state = !ptemp.isIsActive();
+    public synchronized void changeActivation(boolean state,String email){
+       
         try {
             preStmt = con.prepareStatement("update player set isActive = ? where email = ?");
             preStmt.setBoolean(1, state);
@@ -299,9 +298,7 @@ public class Database {
         selectResultSet();
     }
     
-    public synchronized void changePlaying(String email){
-        Player ptemp = this.getPlayer(email);
-        boolean state = !ptemp.isIsPlaying();
+    public synchronized void changePlaying(boolean state,String email){
         try {
             preStmt = con.prepareStatement("update player set isPlaying = ? where email = ?");
             preStmt.setBoolean(1, state);
@@ -352,8 +349,8 @@ public class Database {
     }
     
     public synchronized void makePlaying(String player1, String player2){
-        changePlaying(player1);
-        changePlaying(player2);
+        changePlaying(true,player1);
+        changePlaying(true,player2);
     }
     
 } 

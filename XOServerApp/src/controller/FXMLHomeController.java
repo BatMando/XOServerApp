@@ -5,6 +5,7 @@
  */
 package controller;
 
+import java.io.IOException;
 import java.net.Inet4Address;
 import java.net.URL;
 import java.net.UnknownHostException;
@@ -201,7 +202,7 @@ public class FXMLHomeController implements Initializable {
     
     
     @FXML
-    private void toggleServer(ActionEvent event) throws InterruptedException{
+    private void toggleServer(ActionEvent event) throws InterruptedException, IOException{
         
         serverState = !serverState;
         handleOnOffButtons();
@@ -229,7 +230,7 @@ public class FXMLHomeController implements Initializable {
             }
         }else{ // state is true needed to be deactivate
             try {
-
+                server.notifyAllClients();
                 updateListThread.suspend();
                 flageStartThrea = true;
                 onlineOrOfflineFlag = true;
