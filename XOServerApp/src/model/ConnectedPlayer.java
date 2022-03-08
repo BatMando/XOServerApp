@@ -291,8 +291,8 @@ public class ConnectedPlayer extends Thread implements Initializable {
             game.put(player1, p2);
             game.put(player2, p1);
             p1.ps.println("gameOn");
-            p1.ps.println(player2Name);
-            p1.ps.println(p2.server.getScore(p2.email));
+//            p1.ps.println(player2Name);
+//            p1.ps.println(p2.server.getScore(p2.email));
         }
     }
    
