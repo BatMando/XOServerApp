@@ -311,9 +311,11 @@ public class ConnectedPlayer extends Thread implements Initializable {
     }
    
     private void forwardPress(){
+       // System.out.println(""+token);
        String mail = token.nextToken();
        String btn = token.nextToken();  
        ConnectedPlayer x = game.get(mail);
+       System.out.println(mail + "---" + btn +"----");
        x.ps.println("gameTic");
        x.ps.println(btn);
     }

@@ -312,8 +312,9 @@ public class Database {
     
     public synchronized void updateScore(String email, int score){
         try {
+            int oldScore= getScore(email);
             preStmt = con.prepareStatement("update player set score = ?  where email = ?",ResultSet.TYPE_SCROLL_SENSITIVE ,ResultSet.CONCUR_UPDATABLE  );
-            preStmt.setInt(1, score);
+            preStmt.setInt(1, score+oldScore);
             preStmt.setString(2, email);
             preStmt.executeUpdate();
             selectResultSet();
