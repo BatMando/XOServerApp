@@ -150,6 +150,7 @@ public class FXMLHomeController implements Initializable {
         try {
             Button button;
             VBox vbox = new VBox();
+            scrollPane.getStylesheets().add(getClass().getResource("/css/cssStylingServer.css").toExternalForm());
             HBox hbox;
             
             countOnline = 0;
@@ -178,13 +179,14 @@ public class FXMLHomeController implements Initializable {
 
                     button = new Button(""+server.getResultSet().getString("USERNAME"),view);
                     button.setAlignment(Pos.BOTTOM_LEFT);
-
+                    
                     hbox = new HBox(button,view2);
                     HBox.setMargin(view2, new Insets(10,0,0,5));
                     vbox.getChildren().add(hbox);
-
                     scrollPane.setContent(vbox);
-                    
+                    vbox.getStyleClass().add("vboxStyle");
+                    hbox.getStyleClass().add("hboxStyle");
+                    button.getStyleClass().add("onOffBtn");
                     
                 }
             } 
