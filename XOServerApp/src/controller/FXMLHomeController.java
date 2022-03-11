@@ -66,15 +66,13 @@ public class FXMLHomeController implements Initializable {
     @FXML
     private Button statBtn;
     @FXML
-    private RadioButton onlineRadioBtn;
-    @FXML
-    private RadioButton offlineRadioBtn;
-    @FXML
     private Button onBtn;
     @FXML
     private Button offBtn;
     @FXML
     private ScrollPane scrollPane;
+    @FXML
+    private Button onOffPlayersBtn;
    
   
     /**
@@ -86,6 +84,7 @@ public class FXMLHomeController implements Initializable {
         server = Server.getServer();
         disableBtn();
         handleOnOffButtons();
+        
         updateListThread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -98,7 +97,7 @@ public class FXMLHomeController implements Initializable {
                        }  
                      });
                    try{
-                     Thread.sleep(2000);  
+                     Thread.sleep(300);  
 
                    }catch(InterruptedException ex){
                      emptyList();
@@ -151,21 +150,19 @@ public class FXMLHomeController implements Initializable {
         try {
             Button button;
             VBox vbox = new VBox();
+            scrollPane.getStylesheets().add(getClass().getResource("/css/cssStylingServer.css").toExternalForm());
             HBox hbox;
             
             countOnline = 0;
             
             while(server.databaseInstance.getResultSet().next()){
                 if(server.databaseInstance.getResultSet().getString("ISACTIVE").equals(state+"")){
-                    //System.out.println("platform check action action");
                     
                     ImageView view,view2;
-                        // avatar view
                     view = new ImageView(new Image(this.getClass().getResourceAsStream("/assets/man@2x.png")));
                     view.setFitHeight(30);
                     view.setPreserveRatio(true);
 
-                    // active icon view
                     if(state){
 
                         view2 = new ImageView(new Image(this.getClass().getResourceAsStream("/assets/online@2x.png")));
@@ -182,14 +179,14 @@ public class FXMLHomeController implements Initializable {
 
                     button = new Button(""+server.getResultSet().getString("USERNAME"),view);
                     button.setAlignment(Pos.BOTTOM_LEFT);
-
-                    hbox = new HBox(button,view2);
-                    HBox.setMargin(view2, new Insets(10,0,0,5)); // top right bottom left
-                    //button.getStyleClass().add("button1");
-                    vbox.getChildren().add(hbox);
-
-                    scrollPane.setContent(vbox);
                     
+                    hbox = new HBox(button,view2);
+                    HBox.setMargin(view2, new Insets(10,0,0,5));
+                    vbox.getChildren().add(hbox);
+                    scrollPane.setContent(vbox);
+                    vbox.getStyleClass().add("vboxStyle");
+                    hbox.getStyleClass().add("hboxStyle");
+                    button.getStyleClass().add("onOffBtn");
                     
                 }
             } 
@@ -248,33 +245,6 @@ public class FXMLHomeController implements Initializable {
     }
  
     
-  
-    
-    @FXML
-    private void toggleList(ActionEvent e){
-
-        if(onlineOrOfflineFlag){
-            System.out.println("list on");
-            scrollPane.setContent(null);
-            onlineOrOfflineFlag = false;
-            onlineRadioBtn.setSelected(true);
-            onlineRadioBtn.setDisable(true);
-            offlineRadioBtn.setSelected(false);
-            offlineRadioBtn.setDisable(false);
-            listPlayers(true);
-
-        }else{
-            System.out.println("list off");
-            scrollPane.setContent(null);
-            onlineOrOfflineFlag = true;
-            onlineRadioBtn.setSelected(false);  
-            onlineRadioBtn.setDisable(false);
-            offlineRadioBtn.setSelected(true); 
-            offlineRadioBtn.setDisable(true); 
-            listPlayers(false);
-           
-        }
-    }
     @FXML
     public void getip(ActionEvent e){
         Alert alert = new Alert(Alert.AlertType.NONE);
@@ -319,15 +289,14 @@ public class FXMLHomeController implements Initializable {
     private void disableBtn(){
         ipAddressBtn.setDisable(true);
         statBtn.setDisable(true);
-        onlineRadioBtn.setDisable(true);
-        offlineRadioBtn.setDisable(true);
+        onOffPlayersBtn.setDisable(true);
+        onOffPlayersBtn.setText("Offline");
+        onOffPlayersBtn.setStyle("-fx-background-color: #C72828;"); 
     }
     private void enableBtn(){
-        //offBtn.setDisable(false);
         ipAddressBtn.setDisable(false);
         statBtn.setDisable(false);
-        onlineRadioBtn.setDisable(false);
-        offlineRadioBtn.setDisable(false);
+        onOffPlayersBtn.setDisable(false);
     }   
 
     private void handleOnOffButtons() {
@@ -339,6 +308,27 @@ public class FXMLHomeController implements Initializable {
             offBtn.setDisable(true);
         }
              
+    }
+
+    @FXML
+    private void showPlayersList(ActionEvent event) {
+        
+        if(onlineOrOfflineFlag){
+            System.out.println("list on");
+            scrollPane.setContent(null);
+            onlineOrOfflineFlag = false;
+            onOffPlayersBtn.setText("Offline");
+            onOffPlayersBtn.setStyle("-fx-background-color: #C72828;"); 
+
+        }else{
+            System.out.println("list off");
+            scrollPane.setContent(null);
+            onlineOrOfflineFlag = true;
+            onOffPlayersBtn.setText("Online");
+            onOffPlayersBtn.setStyle("-fx-background-color: #2F862F;");
+           
+        }
+        
     }
     
 }
