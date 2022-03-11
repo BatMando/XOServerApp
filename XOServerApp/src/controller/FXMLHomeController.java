@@ -255,7 +255,11 @@ public class FXMLHomeController implements Initializable {
             ButtonType Yes = new ButtonType("OK"); 
             alert.getDialogPane().getButtonTypes().add(Yes);
             
-            DialogPane dialogPane = alert.getDialogPane();
+           DialogPane dialogPane = alert.getDialogPane();
+           dialogPane.getStylesheets().add(
+             getClass().getResource("/css/cssStylingServer.css").toExternalForm());
+             dialogPane.getStyleClass().add("myDialog");
+
 
             
         } catch (UnknownHostException ex) {
@@ -287,6 +291,7 @@ public class FXMLHomeController implements Initializable {
         scrollPane.setContent(null);
     }
     private void disableBtn(){
+        scrollPane.setVisible(false);
         ipAddressBtn.setDisable(true);
         statBtn.setDisable(true);
         onOffPlayersBtn.setDisable(true);
@@ -294,6 +299,7 @@ public class FXMLHomeController implements Initializable {
         onOffPlayersBtn.setStyle("-fx-background-color: #C72828;"); 
     }
     private void enableBtn(){
+        scrollPane.setVisible(true);
         ipAddressBtn.setDisable(false);
         statBtn.setDisable(false);
         onOffPlayersBtn.setDisable(false);
