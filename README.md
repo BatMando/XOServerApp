@@ -5,8 +5,8 @@
 <p>&emsp;•&ensp;Buttons to open or close it.</p>
 <p>&emsp;•&ensp;Graph that shows the number of online and offline users.</p>
 <p>&emsp;•&ensp;List that shows the names of online users and offline users.</p>
-<p>&emsp;•&ensp;Button that shows the ip address that you can use for connections.</p>
-
+<p>&emsp;•&ensp;Button that shows the ip address that you can use for connections.</p><br>
+# Screenshots<br>
 <img width="847" alt="server1" src="https://user-images.githubusercontent.com/49325998/158030632-f73d3c31-df2f-4b20-b20e-fcc820da8986.png">
 <img width="846" alt="server2" src="https://user-images.githubusercontent.com/49325998/158030639-61dab37b-ee42-49e1-a979-cc70968bf69a.png">
 <img width="844" alt="server3" src="https://user-images.githubusercontent.com/49325998/158030643-e501034b-f2ec-4099-9dd8-54b365c404fb.png">
