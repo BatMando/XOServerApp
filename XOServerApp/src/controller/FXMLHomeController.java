@@ -257,8 +257,8 @@ public class FXMLHomeController implements Initializable {
             
            DialogPane dialogPane = alert.getDialogPane();
            dialogPane.getStylesheets().add(
-             getClass().getResource("/css/cssStylingServer.css").toExternalForm());
-             dialogPane.getStyleClass().add("myDialog");
+           getClass().getResource("/css/cssStylingServer.css").toExternalForm());
+           dialogPane.getStyleClass().add("myDialog");
 
 
             

@@ -58,7 +58,11 @@ public class Chart extends Application {
         chart.setTitle("Tic Tac Toe Statistics");
         
         Scene scene = new Scene(new Group());
+        scene.getStylesheets().add("/css/cssStylingServer.css");
+        chart.applyCss();
+        //chart.getStyleClass().add("chart");
         ((Group) scene.getRoot()).getChildren().add(chart);
+        
         if(dialogStage == null){
             
             dialogStage = new Stage();
